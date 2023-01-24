@@ -8,16 +8,17 @@
 // and my lab1 code
 
 function msort(x, lo, hi) {
-    if (lo >= hi) return;
+    if (lo >= hi || x == null) return;
     /*
     var mid = Math.floor((lo + hi) / 2);
     msort(x, lo, mid);
     msort(x, mid + 1, hi);
     merge(x, lo, mid, hi);
     */
-    const log_size = Math.log(hi+1);
-    for(var n = 1; n < log_size; n = n *2) {
-        for(i=0; i<x.length; i= i+n) {
+   var n; // iteration number
+   var i; // inner iteration number
+    for(n = 1; n < hi+1; n = n * 2) {
+        for(i=0; i < hi+1; i += n * 2) {
             var mid = Math.floor(i/2);
             merge (x, i, mid, i+n);
         } 
