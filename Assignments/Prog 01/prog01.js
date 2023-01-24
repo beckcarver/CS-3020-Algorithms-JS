@@ -7,20 +7,23 @@
 // My code from last semester, which used geeksorgeeks.org/in-place-merge-sort/ 
 // and my lab1 code
 
-function msort(x, lo, hi) {
-    if (lo >= hi || x == null) return;
+function msort(x, lo, arr_size) {
+    if (lo >= arr_size || x == null) return;
     /*
-    var mid = Math.floor((lo + hi) / 2);
+    var mid = Math.floor((lo + arr_size) / 2);
     msort(x, lo, mid);
-    msort(x, mid + 1, hi);
-    merge(x, lo, mid, hi);
+    msort(x, mid + 1, arr_size);
+    merge(x, lo, mid, arr_size);
     */
-   var n; // iteration number
-   var i; // inner iteration number
-    for(n = 1; n < hi+1; n = n * 2) {
-        for(i=0; i < hi+1; i += n * 2) {
-            var mid = Math.floor(i/2);
-            merge (x, i, mid, i+n);
+   var select; // selection size
+   var left; // left iteration variable
+    for(select = 1; select < arr_size; select = select * 2) {
+        for(left = 0; left < arr_size; left += select * 2) {
+            var mid = left + select - 1;
+            var right = left + (2 * select - 1);
+            if (mid > arr_size) merge (x, left, arr_size, arr_size);
+            else if (right > arr_size) merge (x, left, mid, arr_size);
+            else merge (x, left, mid, right);
         } 
     }
 }
