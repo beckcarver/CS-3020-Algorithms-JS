@@ -3,43 +3,50 @@
 // Lab 02
 // COSC 3020, Lars Karthoff
 
-// Run time is n * log(n) because log(n) steps are taken to divide
-// the list. And then after the list is divided, all of the totals
-// are added up individually, which is of O(n). When adding together all members of
-// an array a simple for loop that adds all will always be the fastest.
+/*
+T(n) =  | 1                 (if n <= 1)
+        | 2                 (if n = 2)
+        | 3T(n/3) + n       (if n > 2)
 
-function divSum(arr, total) {
+Solution:
+    3T(n/3) + n
+    3(3T(n/9) + n/3) + n
+    9T(n/9) + 2n
+    27T(n/27) + 3n
+    ...
+    3^i * T(n/3^i) + in
+    (i = log3(n))
+    ...
+    nT(1) + nlog3(n) \belongs\ n log n
+*/
+
+function divSum(arr) {
+    console.log("array: " , arr)
     if (arr.length <= 2) {
+        var total = 0;
         for (let i=0; i < arr.length; i++) {
-            let total = 0;
             total += arr[i];
         }
         return total;
     }
     if (arr.length > 2) {
         var len = arr.length;
-        var arr1 = [];
-        for (let i = len/3; i >= 0; i--) {
-            arr1.push(arr[i]);
-        }
-        var arr2 = [];
-        for (let i = (len/3) * 2; i >= len; i--) {
-            arr2.push(arr[i]);
-        }
-        var arr3 = [];
-        for (let i = len-1; i >= (len/3) * 2; i--) {
-            arr3.push(arr[i]);
-        }
-        console.log(divSum(arr1) , divSum(arr2) , divSum(arr3))
-        return divSum(arr1, total) + divSum(arr2, total) + divSum(arr3, total);
+        var third = len/3;
+
+        // .slice takes care of out of bounds array calls
+        var one = divSum(arr.slice(0,third));
+        var two = divSum (arr.slice(third, 2*third));
+        var three = divSum (arr.slice(2*third, len))
+    
+        console.log("running totals:" , one, two, three)
+        return one + two + three;
     }
-
 }
 
-function divideThreeSum(arr) {
-    var total = 0;
-    return divSum(arr, total)
-}
+arr = [ 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1 ];
 
-arr = [1, 1, 1, 1, 1, 1];
-console.log(divideThreeSum(arr));
+console.log("start")
+console.log(divSum(arr));
