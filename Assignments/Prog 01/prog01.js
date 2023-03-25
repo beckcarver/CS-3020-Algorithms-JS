@@ -5,7 +5,7 @@
 
 // Sources:
 // My code from last semester, which used geeksorgeeks.org/in-place-merge-sort/ 
-// and my lab1 code
+// for a portion of the in-place logic, I also used my lab1 code
 
 function msort(x, lo, arr_size) {
     if (lo >= arr_size || x == null) return;
