@@ -9,12 +9,7 @@
 
 function msort(x, lo, arr_size) {
     if (lo >= arr_size || x == null) return;
-    /*
-    var mid = Math.floor((lo + arr_size) / 2);
-    msort(x, lo, mid);
-    msort(x, mid + 1, arr_size);
-    merge(x, lo, mid, arr_size);
-    */
+
    var select; // selection size
    var left; // left iteration variable
     for(select = 1; select < arr_size; select = select * 2) {
@@ -33,6 +28,7 @@ function mergesort(x) {
 }
 
 function merge(x, lo, mid, hi) {
+    //console.log(x);
     var a = lo, b = mid + 1, sortp = mid, carry = 0;
     if(x[mid] <= x[b]) {
         return; // checks if already sorted
