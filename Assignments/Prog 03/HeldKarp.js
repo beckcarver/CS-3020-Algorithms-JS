@@ -31,7 +31,7 @@ heldKarp(cities, start)
 
 
 // Usage: test(function, max-dimension, seed, scale, print)
-test(tsp_hk, 18, 1, 10, false);
+test(tsp_hk, 22, 1, 10, false);
 
 
 // counts calls of heldKarp, and memoized calls
@@ -123,9 +123,9 @@ function test(testfunc, size = 10, seed = 1, scale = 10, print = false) {
         // syntax is (size, seed, scale)
         testgraph = createMatrix(i, seed, scale, print);
     
-        const start = performance.now();
+        const start = Date.now();
         const result = tsp_hk(testgraph)
-        const end = performance.now();
+        const end = Date.now();
     
         console.log(`(${(i)}x${(i)}) Result ${result} | Time ${((end - start)/1000).toFixed(4)} seconds\n`);
     
